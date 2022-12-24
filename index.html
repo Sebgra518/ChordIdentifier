@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Chord Identifier</title>
+	<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+	<h1>
+		Chord Identifier (Beta)
+	</h1>
+	<h3>
+		Cleff:
+	</h3>
+	<input id="Trebble" type="radio" name="Cleff"
+    value="Trebble" checked="checked"> Trebble
+    <input id="Bass" type="radio" name="Cleff"
+    value="Bass"> Bass
+   
+    <h3>
+      Sharp/Flat:
+    </h3>
+
+    <input type="radio" name="Sharp/Flat"
+    value="Sharp" checked="checked" id = "Sharp"> Sharp
+    <input type="radio" name="Sharp/Flat"
+    value="Flat" id = "Flat"> Flat
+
+    <h3>
+      Number of Accidentals:
+    </h3>
+  <div class="NumberofAccidentals">
+    <input type="radio" name="Number"
+    value="0" id = "0" checked="checked"> 0
+    <input type="radio" name="Number"
+    value="1" id = "1"> 1
+    <input type="radio" name="Number"
+    value="2" id="2"> 2
+    <input type="radio" name="Number"
+    value="3" id="3"> 3
+    <input type="radio" name="Number"
+    value="4"id="4"> 4
+    <input type="radio" name="Number"
+    value="5" id="5"> 5
+    <input type="radio" name="Number"
+    value="6" id="6"> 6
+    <input type="radio" name="Number"
+    value="7" id="7"> 7
+  </div>
+    <h3>
+      Root Note:
+    </h3>
+<div class="Staff">
+  <img src="https://static.thenounproject.com/png/501764-200.png" id="note1">
+  <img src="https://cdn.pixabay.com/photo/2013/07/12/19/19/bass-154546_1280.png" id="BassCleff">
+  <img src="http://assets.stickpng.com/images/5a02cb3018e87004f1ca43e5.png" id="TrebbleCleff">
+<img src = "https://www.midnightmusic.com.au/wp-content/uploads/2013/06/Sharp.png" id = "sharp1">
+<img src = "https://www.midnightmusic.com.au/wp-content/uploads/2013/06/Sharp.png" id = "sharp2">
+<img src = "https://www.midnightmusic.com.au/wp-content/uploads/2013/06/Sharp.png" id = "sharp3">
+<img src = "https://www.midnightmusic.com.au/wp-content/uploads/2013/06/Sharp.png" id = "sharp4">
+<img src = "https://www.midnightmusic.com.au/wp-content/uploads/2013/06/Sharp.png" id = "sharp5">
+<img src = "https://www.midnightmusic.com.au/wp-content/uploads/2013/06/Sharp.png" id = "sharp6">
+<img src = "https://www.midnightmusic.com.au/wp-content/uploads/2013/06/Sharp.png" id = "sharp7">
+<img src = "https://library.kissclipart.com/20180929/iww/kissclipart-flat-note-symbol-clipart-flat-musical-note-clip-ar-1e5e1402b5222702.png" id = "flat1">
+<img src = "https://library.kissclipart.com/20180929/iww/kissclipart-flat-note-symbol-clipart-flat-musical-note-clip-ar-1e5e1402b5222702.png" id = "flat2">
+<img src = "https://library.kissclipart.com/20180929/iww/kissclipart-flat-note-symbol-clipart-flat-musical-note-clip-ar-1e5e1402b5222702.png" id = "flat3">
+<img src = "https://library.kissclipart.com/20180929/iww/kissclipart-flat-note-symbol-clipart-flat-musical-note-clip-ar-1e5e1402b5222702.png" id = "flat4">
+<img src = "https://library.kissclipart.com/20180929/iww/kissclipart-flat-note-symbol-clipart-flat-musical-note-clip-ar-1e5e1402b5222702.png" id = "flat5">
+<img src = "https://library.kissclipart.com/20180929/iww/kissclipart-flat-note-symbol-clipart-flat-musical-note-clip-ar-1e5e1402b5222702.png" id = "flat6">
+<img src = "https://library.kissclipart.com/20180929/iww/kissclipart-flat-note-symbol-clipart-flat-musical-note-clip-ar-1e5e1402b5222702.png" id = "flat7">
+
+<!--Staff Lines-->
+  <div id="line1"></div>
+  <div id="space1"></div>
+  <div id="line2"></div>
+  <div id="space2"></div>
+  <div id="line3"></div>
+  <div id="space3"></div>
+  <div id="line4"></div>
+  <div id="space4"></div>
+  <div id="line5"></div>
+  <br>
+ <div id = "printStaff"></div>>
+<!--piano-->
+<div id="c1"></div>
+<p id = "ctxt">C</p>
+
+<div id="cs1"></div>
+<p id = "cstxt">C#</p>
+
+<div id="d1"></div>
+<p id = "dtxt">D</p>
+
+<div id="ds1"></div>
+<p id = "dstxt">D#</p>
+
+<div id="e1"></div>
+<p id = "etxt">E</p>
+
+<div id="f1"></div>
+<p id = "ftxt">F</p>
+
+<div id="fs1"></div>
+<p id = "fstxt">F#</p>
+
+<div id="g1"></div>
+<p id = "gtxt">G</p>
+
+<div id="gs1"></div>
+<p id = "gstxt">G#</p>
+
+<div id="a1"></div>
+<p id = "atxt">A</p>
+
+<div id="as1"></div>
+<p id = "astxt">A#</p>
+
+<div id="b1"></div>
+<p id = "btxt">B</p>
+
+<div id="c2"></div>
+<p id = "c2txt">C</p>
+
+<div id="cs2"></div>
+<p id = "cs1txt">C#</p>
+
+
+<div id="d2"></div>
+<p id = "d2txt">D</p>
+
+<div id="ds2"></div>
+<p id = "ds1txt">D#</p>
+
+<div id="e2"></div>
+<p id = "e2txt">E</p>
+
+<div id="f2"></div>
+<p id = "f2txt">F</p>
+
+<div id="fs2"></div>
+<p id = "fs1txt">F#</p>
+
+<div id="g2"></div>
+<p id = "g2txt">G</p>
+
+<div id="gs2"></div>
+<p id = "gs1txt">G#</p>
+
+<div id="a2"></div>
+<p id = "a2txt">A</p>
+
+<div id="as2"></div>
+<p id = "as1txt">A#</p>
+
+<div id="b2"></div>
+<p id = "b2txt">B</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div id = "printPiano"></div>>
+  <input id="button" type="button" name="button" value="Enter" />
+<br>
+<br>
+<br>
+    <script src="script.js"></script>
+  </body>
+</html>
