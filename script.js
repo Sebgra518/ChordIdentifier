@@ -43,73 +43,47 @@ function clearAllNotes() {
   }
 }
 
+//Places a note on the staff
+function placeNote(num,location){
+  document.getElementById("note1").style.top = location;
+  document.getElementById("note1").style.visibility = "visible";
+  clearAllNotes();
+  notes[num] = true;
+}
+
+//Check if a line/space was clicked and place a note on the staff
 line1.onclick = function () {
-  document.getElementById("note1").style.top = "344px";
-  document.getElementById("note1").style.visibility = "visible";
-  clearAllNotes();
-  notes[0] = true;
+  placeNote(0,"344px");
 };
-
 space1.onclick = function () {
-  document.getElementById("note1").style.top = "350px";
-  document.getElementById("note1").style.visibility = "visible";
-  clearAllNotes();
-  notes[1] = true;
+  placeNote(1,"350px");
 };
-
 line2.onclick = function () {
-  document.getElementById("note1").style.top = "357px";
-  document.getElementById("note1").style.visibility = "visible";
-  clearAllNotes();
-  notes[2] = true;
+  placeNote(2,"357px");
 };
-
 space2.onclick = function () {
-  document.getElementById("note1").style.top = "364px";
-  document.getElementById("note1").style.visibility = "visible";
-  clearAllNotes();
-  notes[3] = true;
+  placeNote(3,"364px");
 };
-
 line3.onclick = function () {
-  document.getElementById("note1").style.top = "372px";
-  document.getElementById("note1").style.visibility = "visible";
-  clearAllNotes();
-  notes[4] = true;
+  placeNote(4,"372px");
 };
-
 space3.onclick = function () {
-  document.getElementById("note1").style.top = "380px";
-  document.getElementById("note1").style.visibility = "visible";
-  clearAllNotes();
-  notes[5] = true;
+  placeNote(5,"380px");
 };
-
 line4.onclick = function () {
-  document.getElementById("note1").style.top = "386px";
-  document.getElementById("note1").style.visibility = "visible";
-  clearAllNotes();
-  notes[6] = true;
+  placeNote(6,"386px");
 };
-
 space4.onclick = function () {
-  document.getElementById("note1").style.top = "394px";
-  document.getElementById("note1").style.visibility = "visible";
-  clearAllNotes();
-  notes[7] = true;
+  placeNote(7,"394px");
 };
-
 line5.onclick = function () {
-  document.getElementById("note1").style.top = "402px";
-  document.getElementById("note1").style.visibility = "visible";
-  clearAllNotes();
-  notes[8] = true;
+  placeNote(8,"402px");
 };
-
 document.getElementById("note1").onclick = function () {
   document.getElementById("note1").style.visibility = "hidden";
   clearAllNotes();
 };
+
 
 document.getElementById("Trebble").onclick = function () {
   document.getElementById("TrebbleCleff").style.visibility = "visible";
@@ -177,27 +151,23 @@ function displaySharpsOrFlats(num) {
   }
 }
 
+function clearSharpsAndFlats(){
+//Clear all sharps
+for (var i = 1; i <= 7; i++) {
+  document.getElementById("sharp" + i).style.visibility = "hidden";
+}
+//Clear all flats
+for (var i = 1; i <= 7; i++) {
+  document.getElementById("flat" + i).style.visibility = "hidden";
+}
+n0.checked = true;
+}
+
 document.getElementById("Sharp").onclick = function () {
-  //Clear all sharps
-  for (var i = 1; i <= 7; i++) {
-    document.getElementById("sharp" + i).style.visibility = "hidden";
-  }
-  //Clear all flats
-  for (var i = 1; i <= 7; i++) {
-    document.getElementById("flat" + i).style.visibility = "hidden";
-  }
-  n0.checked = true;
+  clearSharpsAndFlats();
 };
 document.getElementById("Flat").onclick = function () {
-  //Clear all sharps
-  for (var i = 1; i <= 7; i++) {
-    document.getElementById("sharp" + i).style.visibility = "hidden";
-  }
-  //Clear all flats
-  for (var i = 1; i <= 7; i++) {
-    document.getElementById("flat" + i).style.visibility = "hidden";
-  }
-  n0.checked = true;
+  clearSharpsAndFlats();
 };
 
 //Show Sharp or Flat Key Sig (Trebble)
@@ -227,221 +197,92 @@ document.getElementById("7").onclick = function () {
 };
 
 //piano
-document.getElementById("c1").onclick = function () {
-  if (pianoTileColor[0]) {
-    document.getElementById("c1").style.backgroundColor = "white";
-    pianoTileColor[0] = false;
+function togglePianoButton(key,num,s){
+  if (pianoTileColor[num]) {
+    if(s){
+      document.getElementById(key).style.backgroundColor = "black";
+    } else {
+      document.getElementById(key).style.backgroundColor = "white";
+    }
+    
+    pianoTileColor[num] = false;
   } else {
-    document.getElementById("c1").style.backgroundColor = "lightblue";
-    pianoTileColor[0] = true;
+    document.getElementById(key).style.backgroundColor = "lightblue";
+    pianoTileColor[num] = true;
   }
+}
+
+document.getElementById("c1").onclick = function () {
+  togglePianoButton("c1",0,false);
 };
 document.getElementById("cs1").onclick = function () {
-  if (pianoTileColor[1]) {
-    document.getElementById("cs1").style.backgroundColor = "black";
-    pianoTileColor[1] = false;
-  } else {
-    document.getElementById("cs1").style.backgroundColor = "lightblue";
-    pianoTileColor[1] = true;
-  }
+  togglePianoButton("cs1",1,true);
 };
 document.getElementById("d1").onclick = function () {
-  if (pianoTileColor[2]) {
-    document.getElementById("d1").style.backgroundColor = "white";
-    pianoTileColor[2] = false;
-  } else {
-    document.getElementById("d1").style.backgroundColor = "lightblue";
-    pianoTileColor[2] = true;
-  }
+  togglePianoButton("d1",2,false);
 };
 document.getElementById("ds1").onclick = function () {
-  if (pianoTileColor[3]) {
-    document.getElementById("ds1").style.backgroundColor = "black";
-    pianoTileColor[3] = false;
-  } else {
-    document.getElementById("ds1").style.backgroundColor = "lightblue";
-    pianoTileColor[3] = true;
-  }
+  togglePianoButton("ds1",3,true);
 };
 document.getElementById("e1").onclick = function () {
-  if (pianoTileColor[4]) {
-    document.getElementById("e1").style.backgroundColor = "white";
-    pianoTileColor[4] = false;
-  } else {
-    document.getElementById("e1").style.backgroundColor = "lightblue";
-    pianoTileColor[4] = true;
-  }
+  togglePianoButton("e1",4,false);
 };
 document.getElementById("f1").onclick = function () {
-  if (pianoTileColor[5]) {
-    document.getElementById("f1").style.backgroundColor = "white";
-    pianoTileColor[5] = false;
-  } else {
-    document.getElementById("f1").style.backgroundColor = "lightblue";
-    pianoTileColor[5] = true;
-  }
+  togglePianoButton("f1",5,false);
 };
 document.getElementById("fs1").onclick = function () {
-  if (pianoTileColor[6]) {
-    document.getElementById("fs1").style.backgroundColor = "black";
-    pianoTileColor[6] = false;
-  } else {
-    document.getElementById("fs1").style.backgroundColor = "lightblue";
-    pianoTileColor[6] = true;
-  }
+  togglePianoButton("fs1",6,true);
 };
 document.getElementById("g1").onclick = function () {
-  if (pianoTileColor[7]) {
-    document.getElementById("g1").style.backgroundColor = "white";
-    pianoTileColor[7] = false;
-  } else {
-    document.getElementById("g1").style.backgroundColor = "lightblue";
-    pianoTileColor[7] = true;
-  }
+  togglePianoButton("g1",7,false);
 };
 document.getElementById("gs1").onclick = function () {
-  if (pianoTileColor[8]) {
-    document.getElementById("gs1").style.backgroundColor = "black";
-    pianoTileColor[8] = false;
-  } else {
-    document.getElementById("gs1").style.backgroundColor = "lightblue";
-    pianoTileColor[8] = true;
-  }
+  togglePianoButton("gs1",8,true);
 };
 document.getElementById("a1").onclick = function () {
-  if (pianoTileColor[9]) {
-    document.getElementById("a1").style.backgroundColor = "white";
-    pianoTileColor[9] = false;
-  } else {
-    document.getElementById("a1").style.backgroundColor = "lightblue";
-    pianoTileColor[9] = true;
-  }
+  togglePianoButton("a1",9,false);
 };
 document.getElementById("as1").onclick = function () {
-  if (pianoTileColor[10]) {
-    document.getElementById("as1").style.backgroundColor = "black";
-    pianoTileColor[10] = false;
-  } else {
-    document.getElementById("as1").style.backgroundColor = "lightblue";
-    pianoTileColor[10] = true;
-  }
+  togglePianoButton("as1",10,true);
 };
 document.getElementById("b1").onclick = function () {
-  if (pianoTileColor[11]) {
-    document.getElementById("b1").style.backgroundColor = "white";
-    pianoTileColor[11] = false;
-  } else {
-    document.getElementById("b1").style.backgroundColor = "lightblue";
-    pianoTileColor[11] = true;
-  }
+  togglePianoButton("b1",11,false);
 };
 document.getElementById("c2").onclick = function () {
-  if (pianoTileColor[12]) {
-    document.getElementById("c2").style.backgroundColor = "white";
-    pianoTileColor[12] = false;
-  } else {
-    document.getElementById("c2").style.backgroundColor = "lightblue";
-    pianoTileColor[12] = true;
-  }
+  togglePianoButton("c2",12,false);
 };
 document.getElementById("cs2").onclick = function () {
-  if (pianoTileColor[13]) {
-    document.getElementById("cs2").style.backgroundColor = "black";
-    pianoTileColor[13] = false;
-  } else {
-    document.getElementById("cs2").style.backgroundColor = "lightblue";
-    pianoTileColor[13] = true;
-  }
+  togglePianoButton("cs2",13,true);
 };
 document.getElementById("d2").onclick = function () {
-  if (pianoTileColor[14]) {
-    document.getElementById("d2").style.backgroundColor = "white";
-    pianoTileColor[14] = false;
-  } else {
-    document.getElementById("d2").style.backgroundColor = "lightblue";
-    pianoTileColor[14] = true;
-  }
+  togglePianoButton("d2",14,false);
 };
 document.getElementById("ds2").onclick = function () {
-  if (pianoTileColor[15]) {
-    document.getElementById("ds2").style.backgroundColor = "black";
-    pianoTileColor[15] = false;
-  } else {
-    document.getElementById("ds2").style.backgroundColor = "lightblue";
-    pianoTileColor[15] = true;
-  }
+  togglePianoButton("ds2",15,true);
 };
 document.getElementById("e2").onclick = function () {
-  if (pianoTileColor[16]) {
-    document.getElementById("e2").style.backgroundColor = "white";
-    pianoTileColor[16] = false;
-  } else {
-    document.getElementById("e2").style.backgroundColor = "lightblue";
-    pianoTileColor[16] = true;
-  }
+  togglePianoButton("e2",16,false);
 };
 document.getElementById("f2").onclick = function () {
-  if (pianoTileColor[17]) {
-    document.getElementById("f2").style.backgroundColor = "white";
-    pianoTileColor[17] = false;
-  } else {
-    document.getElementById("f2").style.backgroundColor = "lightblue";
-    pianoTileColor[17] = true;
-  }
+  togglePianoButton("f2",17,false);
 };
 document.getElementById("fs2").onclick = function () {
-  if (pianoTileColor[18]) {
-    document.getElementById("fs2").style.backgroundColor = "black";
-    pianoTileColor[18] = false;
-  } else {
-    document.getElementById("fs2").style.backgroundColor = "lightblue";
-    pianoTileColor[18] = true;
-  }
+  togglePianoButton("fs2",18,true);
 };
 document.getElementById("g2").onclick = function () {
-  if (pianoTileColor[19]) {
-    document.getElementById("g2").style.backgroundColor = "white";
-    pianoTileColor[19] = false;
-  } else {
-    document.getElementById("g2").style.backgroundColor = "lightblue";
-    pianoTileColor[19] = true;
-  }
+  togglePianoButton("g2",19,false);
 };
 document.getElementById("gs2").onclick = function () {
-  if (pianoTileColor[20]) {
-    document.getElementById("gs2").style.backgroundColor = "black";
-    pianoTileColor[20] = false;
-  } else {
-    document.getElementById("gs2").style.backgroundColor = "lightblue";
-    pianoTileColor[20] = true;
-  }
+  togglePianoButton("gs2",20,true);
 };
 document.getElementById("a2").onclick = function () {
-  if (pianoTileColor[21]) {
-    document.getElementById("a2").style.backgroundColor = "white";
-    pianoTileColor[21] = false;
-  } else {
-    document.getElementById("a2").style.backgroundColor = "lightblue";
-    pianoTileColor[21] = true;
-  }
+  togglePianoButton("a2",21,false);
 };
 document.getElementById("as2").onclick = function () {
-  if (pianoTileColor[22]) {
-    document.getElementById("as2").style.backgroundColor = "black";
-    pianoTileColor[22] = false;
-  } else {
-    document.getElementById("as2").style.backgroundColor = "lightblue";
-    pianoTileColor[22] = true;
-  }
+  togglePianoButton("as2",22,true);
 };
 document.getElementById("b2").onclick = function () {
-  if (pianoTileColor[23]) {
-    document.getElementById("b2").style.backgroundColor = "white";
-    pianoTileColor[23] = false;
-  } else {
-    document.getElementById("b2").style.backgroundColor = "lightblue";
-    pianoTileColor[23] = true;
-  }
+  togglePianoButton("b2",23,false);
 };
 
 //Checks which note the chord is (ie. A,B,C,E,F...) and adds to the pianoOuput string
@@ -458,10 +299,7 @@ function checkKey() {
 function checkAdditional() {
   //3
   if (pianoTileColor[currentKey + 4]) {
-    //Augmented
-    if (pianoTileColor[currentKey + 8]) {
-      pianoOutput += "aug";
-    }
+    
     //5
     if (pianoTileColor[currentKey + 7]) {
 
@@ -477,9 +315,18 @@ function checkAdditional() {
       //Major
       else {
         pianoOutput += "";
+        checkAdd(currentKey + 8);
       }
     }
+    //Augmented
+    else if (pianoTileColor[currentKey + 8]) {
+      pianoOutput += "aug";
+    }
+    else {
+      pianoOutput = "Not a chord";
+    }
   }
+
   //flat3
   else if (pianoTileColor[currentKey + 3]) {
     //5
@@ -490,9 +337,69 @@ function checkAdditional() {
     else if (pianoTileColor[currentKey + 6]) {
       pianoOutput += "dim";
     }
+    else {
+      pianoOutput = "Not a chord";
+    }
   }
   else {
     pianoOutput = "Not a chord";
+  }
+}
+
+function checkAdd(start){
+ for (var i = start; i < 24; i++){
+  if (pianoTileColor[i]){
+    pianoOutput += "add" + arrayToInterval(i);
+  }
+  
+ }
+}
+
+//Converts the array version of the piano into intervals (still trying to find a way to optimise)
+//Yes, I could of used switch, but used for my better understanding of the problem
+function arrayToInterval(i){
+  //If i is even
+  if (i == 2){
+    return 2; //-0
+  }
+  else if (i == 4){
+    return 3; //-1
+  }
+  else if (i == 12){
+    return 8;  //-4
+  }
+  else if (i == 14){
+    return 9;  //-5
+  }
+  else if (i == 16){
+    return 10;  //-6
+  }
+
+
+//If i is odd
+  else if (i == 5){
+    return 4; //-1
+  }
+  else if (i == 7){
+    return 5; //-2
+  }
+  else if (i == 9){
+    return 6; //-3
+  }
+  else if (i == 11){
+    return 7; //-4
+  }
+  else if (i == 17){
+    return 11;  //-6
+  }
+  else if (i == 19){
+    return 12;  //-7
+  }
+  else if (i == 21){
+    return 13;  //-8
+  }
+  else if (i == 23){
+    return 14;  //-9
   }
 }
 
@@ -501,6 +408,7 @@ function checkAdditional() {
 button.onclick = function () {
 
   //Staff
+  
   //TrebbleCleff
   if (trebble.checked) {
     //0 Sharps/Flats
@@ -550,327 +458,238 @@ button.onclick = function () {
       //2 Sharp
       else if (n2.checked) {
         if (notes[0] || notes[7]) {
-          console.log("minor");
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[1] || notes[8]) {
-          console.log("minor");
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[2]) {
-          console.log("Major");
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[3]) {
-          console.log("Diminished");
           htmlPrintStaff.innerHTML = "Diminished";
         } else if (notes[4]) {
-          console.log("minor");
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[5]) {
-          console.log("Major");
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[6]) {
-          console.log("Major");
           htmlPrintStaff.innerHTML = "Major";
         }
       }
       //3 Sharp
       else if (n3.checked) {
         if (notes[0] || notes[7]) {
-          console.log("minor");
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[1] || notes[8]) {
-          console.log("Major");
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[2]) {
-          console.log("Major");
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[3]) {
-          console.log("minor");
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[4]) {
-          console.log("minor");
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[5]) {
-          console.log("Major");
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[6]) {
-          console.log("Diminished");
           htmlPrintStaff.innerHTML = "Diminished";
         }
       }
       //4 Sharp
       else if (n4.checked) {
         if (notes[0] || notes[7]) {
-          console.log("minor");
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[1] || notes[8]) {
-          console.log("Major");
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[2]) {
-          console.log("Diminished");
           htmlPrintStaff.innerHTML = "Diminished";
         } else if (notes[3]) {
-          console.log("minor");
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[4]) {
-          console.log("Major");
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[5]) {
-          console.log("Major");
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[6]) {
-          console.log("minor");
           htmlPrintStaff.innerHTML = "minor";
         }
       }
       //5  Sharp
       else if (n5.checked) {
         if (notes[0] || notes[7]) {
-          console.log("Major");
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[1] || notes[8]) {
-          console.log("Major");
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[2]) {
-          console.log("minor");
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[3]) {
-          console.log("minor");
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[4]) {
-          console.log("Major");
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[5]) {
-          console.log("Diminished");
           htmlPrintStaff.innerHTML = "Diminished";
         } else if (notes[6]) {
-          console.log("minor");
           htmlPrintStaff.innerHTML = "minor";
         }
       }
       //6  Sharp
       else if (n6.checked) {
         if (notes[0] || notes[7]) {
-          console.log("Major");
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[1] || notes[8]) {
-          console.log("Diminished");
           htmlPrintStaff.innerHTML = "Diminished";
         } else if (notes[2]) {
-          console.log("minor");
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[3]) {
-          console.log("Major");
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[4]) {
-          console.log("Major");
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[5]) {
-          console.log("minor");
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[6]) {
-          console.log("minor");
           htmlPrintStaff.innerHTML = "minor";
         }
       }
       //7 Sharp
       else if (n7.checked) {
         if (notes[0] || notes[7]) {
-          console.log("Major");
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[1] || notes[8]) {
-          console.log("minor");
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[2]) {
-          console.log("minor");
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[3]) {
-          console.log("Major");
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[4]) {
           console.log("");
         } else if (notes[5]) {
-          console.log("minor");
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[6]) {
-          console.log("Major");
           htmlPrintStaff.innerHTML = "Major";
         }
       }
     }
+
     //CheckFlat
     else if (flat.checked) {
       //1 Flat
       if (n1.checked) {
-        if (notes[0] || notes[7]) {
-          console.log("Major"); //
+        if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[1] || notes[8]) {
-          console.log("Diminished"); //
+        } else if (notes[1] || notes[8]) { //
           htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[2]) {
-          console.log("minor"); //
+        } else if (notes[2]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[3]) {
-          console.log("Major"); //
+        } else if (notes[3]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[4]) {
-          console.log("Major"); //
+        } else if (notes[4]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[5]) {
-          console.log("minor"); //
+        } else if (notes[5]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[6]) {
-          console.log("minor"); //
+        } else if (notes[6]) { //
           htmlPrintStaff.innerHTML = "minor";
         }
       }
       //2 Flat
       else if (n2.checked) {
         if (notes[0] || notes[7]) {
-          console.log("Major");
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[1] || notes[8]) {
-          console.log("Major");
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[2]) {
-          console.log("minor");
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[3]) {
-          console.log("minor");
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[4]) {
-          console.log("Major");
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[5]) {
-          console.log("Diminished");
           htmlPrintStaff.innerHTML = "Diminished";
         } else if (notes[6]) {
-          console.log("minor");
           htmlPrintStaff.innerHTML = "minor";
         }
       }
       //3 Flat
       else if (n3.checked) {
-        if (notes[0] || notes[7]) {
-          console.log("minor"); //
+        if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[1] || notes[8]) {
-          console.log("Major"); //
+        } else if (notes[1] || notes[8]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[2]) {
-          console.log("Diminished"); //
+        } else if (notes[2]) { //
           htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[3]) {
-          console.log("minor"); //
+        } else if (notes[3]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[4]) {
-          console.log("Major"); //
+        } else if (notes[4]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[5]) {
-          console.log("Major"); //
+        } else if (notes[5]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[6]) {
-          console.log("minor"); //
+        } else if (notes[6]) { //
           htmlPrintStaff.innerHTML = "minor";
         }
       }
       //4 Flat
       else if (n4.checked) {
-        if (notes[0] || notes[7]) {
-          console.log("minor"); //
+        if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[1] || notes[8]) {
-          console.log("Major"); //
+        } else if (notes[1] || notes[8]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[2]) {
-          console.log("Major"); //
+        } else if (notes[2]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[3]) {
-          console.log("minor"); //
+        } else if (notes[3]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[4]) {
-          console.log("minor"); //
+        } else if (notes[4]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[5]) {
-          console.log("Major"); //
+        } else if (notes[5]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[6]) {
-          console.log("Diminished"); //
+        } else if (notes[6]) { //
           htmlPrintStaff.innerHTML = "Diminished";
         }
       }
       //5  Sharp
       else if (n5.checked) {
-        if (notes[0] || notes[7]) {
-          console.log("minor"); //
+        if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[1] || notes[8]) {
-          console.log("minor"); //
+        } else if (notes[1] || notes[8]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[2]) {
-          console.log("Major"); //
+        } else if (notes[2]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[3]) {
-          console.log("Diminished"); //
+        } else if (notes[3]) { //
           htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[4]) {
-          console.log("minor"); //
+        } else if (notes[4]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[5]) {
-          console.log("Major"); //
+        } else if (notes[5]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[6]) {
-          console.log("Major"); //
+        } else if (notes[6]) { //
           htmlPrintStaff.innerHTML = "Major";
         }
       }
       //6  Sharp
       else if (n6.checked) {
-        if (notes[0] || notes[7]) {
-          console.log("Diminished"); //
+        if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[1] || notes[8]) {
-          console.log("minor"); //
+        } else if (notes[1] || notes[8]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[2]) {
-          console.log("Major"); //
+        } else if (notes[2]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[3]) {
-          console.log("Major"); //
+        } else if (notes[3]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[4]) {
-          console.log("minor"); //
+        } else if (notes[4]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[5]) {
-          console.log("minor"); //
+        } else if (notes[5]) { //
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[6]) {
-          console.log("Major");
           htmlPrintStaff.innerHTML = "Major";
         }
       }
       //7 Sharp
       else if (n7.checked) {
-        if (notes[0] || notes[7]) {
-          console.log("Major"); //
+        if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[1] || notes[8]) {
-          console.log("minor"); //
+        } else if (notes[1] || notes[8]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[2]) {
-          console.log("minor"); //
+        } else if (notes[2]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[3]) {
-          console.log("Major"); //
+        } else if (notes[3]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[4]) {
-          console.log("Diminished"); //
+        } else if (notes[4]) { //
           htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[5]) {
-          console.log("minor"); //
+        } else if (notes[5]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[6]) {
-          console.log("Major"); //
+        } else if (notes[6]) { //
           htmlPrintStaff.innerHTML = "Major";
         }
       }
@@ -882,376 +701,271 @@ button.onclick = function () {
     //0 Sharp
     if (n0.checked) {
       if (notes[0] || notes[7]) {
-        console.log("minor");
         htmlPrintStaff.innerHTML = "minor";
       } else if (notes[1] || notes[8]) {
-        console.log("Major");
         htmlPrintStaff.innerHTML = "Major";
       } else if (notes[2]) {
-        console.log("Major");
         htmlPrintStaff.innerHTML = "Major";
       } else if (notes[3]) {
-        console.log("minor");
         htmlPrintStaff.innerHTML = "minor";
       } else if (notes[4]) {
-        console.log("minor");
         htmlPrintStaff.innerHTML = "minor";
       } else if (notes[5]) {
-        console.log("Major");
         htmlPrintStaff.innerHTML = "Major";
       } else if (notes[6]) {
-        console.log("Diminished");
         htmlPrintStaff.innerHTML = "Diminished";
       }
     } else if (sharp.checked) {
       //1 Sharp
       if (n1.checked) {
-        if (notes[0] || notes[7]) {
-          console.log("minor"); //
+        if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[1] || notes[8]) {
-          console.log("Major"); //
+        } else if (notes[1] || notes[8]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[2]) {
-          console.log("Diminished"); //
+        } else if (notes[2]) { //
           htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[3]) {
-          console.log("minor"); //
+        } else if (notes[3]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[4]) {
-          console.log("Major"); //
+        } else if (notes[4]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[5]) {
-          console.log("Major"); //
+        } else if (notes[5]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[6]) {
-          console.log("minor"); //
+        } else if (notes[6]) { //
           htmlPrintStaff.innerHTML = "minor";
         }
       }
       //2 Sharp
       if (n2.checked) {
-        if (notes[0] || notes[7]) {
-          console.log("Major"); //
+        if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[1] || notes[8]) {
-          console.log("Major"); //
+        } else if (notes[1] || notes[8]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[2]) {
-          console.log("minor"); //
+        } else if (notes[2]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[3]) {
-          console.log("minor"); //
+        } else if (notes[3]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[4]) {
-          console.log("Major"); //
+        } else if (notes[4]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[5]) {
-          console.log("Diminished"); //
+        } else if (notes[5]) { //
           htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[6]) {
-          console.log("minor"); //
+        } else if (notes[6]) { //
           htmlPrintStaff.innerHTML = "minor";
         }
       }
       //3 Sharp
       if (n3.checked) {
-        if (notes[0] || notes[7]) {
-          console.log("Major"); //
+        if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[1] || notes[8]) {
-          console.log("Diminished"); //
+        } else if (notes[1] || notes[8]) { //
           htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[2]) {
-          console.log("minor"); //
+        } else if (notes[2]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[3]) {
-          console.log("Major"); //
+        } else if (notes[3]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[4]) {
-          console.log("Major"); //
+        } else if (notes[4]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[5]) {
-          console.log("minor"); //
+        } else if (notes[5]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[6]) {
-          console.log("minor"); //
+        } else if (notes[6]) { //
           htmlPrintStaff.innerHTML = "minor";
         }
       }
       //4 Sharp
       if (n4.checked) {
-        if (notes[0] || notes[7]) {
-          console.log("Major"); //
+        if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[1] || notes[8]) {
-          console.log("minor"); //
+        } else if (notes[1] || notes[8]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[2]) {
-          console.log("minor"); //
+        } else if (notes[2]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[3]) {
-          console.log("Major"); //
+        } else if (notes[3]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[4]) {
-          console.log("Diminished"); //
+        } else if (notes[4]) { //
           htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[5]) {
-          console.log("minor"); //
+        } else if (notes[5]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[6]) {
-          console.log("Major"); //
+        } else if (notes[6]) { //
           htmlPrintStaff.innerHTML = "Major";
         }
       }
       //5 Sharp
       if (n5.checked) {
-        if (notes[0] || notes[7]) {
-          console.log("Diminished"); //
+        if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[1] || notes[8]) {
-          console.log("minor"); //
+        } else if (notes[1] || notes[8]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[2]) {
-          console.log("Major"); //
+        } else if (notes[2]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[3]) {
-          console.log("Major"); //
+        } else if (notes[3]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[4]) {
-          console.log("minor"); //
+        } else if (notes[4]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[5]) {
-          console.log("minor"); //
+        } else if (notes[5]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[6]) {
-          console.log("Major"); //
+        } else if (notes[6]) { //
           htmlPrintStaff.innerHTML = "Major";
         }
       }
       //6 Sharp
       if (n6.checked) {
-        if (notes[0] || notes[7]) {
-          console.log("minor"); //
+        if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[1] || notes[8]) {
-          console.log("minor"); //
+        } else if (notes[1] || notes[8]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[2]) {
-          console.log("Major"); //
+        } else if (notes[2]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[3]) {
-          console.log("Diminished"); //
+        } else if (notes[3]) { //
           htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[4]) {
-          console.log("minor"); //
+        } else if (notes[4]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[5]) {
-          console.log("Major"); //
+        } else if (notes[5]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[6]) {
-          console.log("Major"); //
+        } else if (notes[6]) { //
           htmlPrintStaff.innerHTML = "Major";
         }
       }
       //7 Sharp
       if (n7.checked) {
-        if (notes[0] || notes[7]) {
-          console.log("minor"); //
+        if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[1] || notes[8]) {
-          console.log("Major"); //
+        } else if (notes[1] || notes[8]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[2]) {
-          console.log("Major"); //
+        } else if (notes[2]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[3]) {
-          console.log("minor"); //
+        } else if (notes[3]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[4]) {
-          console.log("minor"); //
+        } else if (notes[4]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[5]) {
-          console.log("Major"); //
+        } else if (notes[5]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[6]) {
-          console.log("Diminished"); //
+        } else if (notes[6]) { //
           htmlPrintStaff.innerHTML = "Diminished";
         }
       }
     } else if (flat.checked) {
       //1 Flat
       if (n1.checked) {
-        if (notes[0] || notes[7]) {
-          console.log("minor"); //
+        if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[1] || notes[8]) {
-          console.log("minor"); //
+        } else if (notes[1] || notes[8]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[2]) {
-          console.log("Major"); //
+        } else if (notes[2]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[3]) {
-          console.log("Diminished"); //
+        } else if (notes[3]) { //
           htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[4]) {
-          console.log("minor"); //
+        } else if (notes[4]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[5]) {
-          console.log("Major"); //
+        } else if (notes[5]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[6]) {
-          console.log("Major"); //
+        } else if (notes[6]) { //
           htmlPrintStaff.innerHTML = "Major";
         }
       }
       //2 Flat
       if (n2.checked) {
-        if (notes[0] || notes[7]) {
-          console.log("Diminished"); //
+        if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[1] || notes[8]) {
-          console.log("minor"); //
+        } else if (notes[1] || notes[8]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[2]) {
-          console.log("Major"); //
+        } else if (notes[2]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[3]) {
-          console.log("Major"); //
+        } else if (notes[3]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[4]) {
-          console.log("minor"); //
+        } else if (notes[4]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[5]) {
-          console.log("Major"); //
+        } else if (notes[5]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[6]) {
-          console.log("Major"); //
+        } else if (notes[6]) { //
           htmlPrintStaff.innerHTML = "Major";
         }
       }
       //3 Flat
       if (n3.checked) {
-        if (notes[0] || notes[7]) {
-          console.log("Major"); //
+        if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[1] || notes[8]) {
-          console.log("minor"); //
+        } else if (notes[1] || notes[8]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[2]) {
-          console.log("minor"); //
+        } else if (notes[2]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[3]) {
-          console.log("Major"); //
+        } else if (notes[3]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[4]) {
-          console.log("Diminished"); //
+        } else if (notes[4]) { //
           htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[5]) {
-          console.log("minor"); //
+        } else if (notes[5]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[6]) {
-          console.log("Major"); //
+        } else if (notes[6]) { //
           htmlPrintStaff.innerHTML = "Major";
         }
       }
       //4 Flat
       if (n4.checked) {
-        if (notes[0] || notes[7]) {
-          console.log("Major"); //
+        if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[1] || notes[8]) {
-          console.log("Diminished"); //
+        } else if (notes[1] || notes[8]) { //
           htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[2]) {
-          console.log("minor"); //
+        } else if (notes[2]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[3]) {
-          console.log("Major"); //
+        } else if (notes[3]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[4]) {
-          console.log("Major"); //
+        } else if (notes[4]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[5]) {
-          console.log("minor"); //
+        } else if (notes[5]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[6]) {
-          console.log("minor"); //
+        } else if (notes[6]) { //
           htmlPrintStaff.innerHTML = "minor";
         }
       }
       //5 Flat
       if (n5.checked) {
-        if (notes[0] || notes[7]) {
-          console.log("Major"); //
+        if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[1] || notes[8]) {
-          console.log("Major"); //
+        } else if (notes[1] || notes[8]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[2]) {
-          console.log("minor"); //
+        } else if (notes[2]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[3]) {
-          console.log("minor"); //
+        } else if (notes[3]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[4]) {
-          console.log("Major"); //
+        } else if (notes[4]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[5]) {
-          console.log("Diminished"); //
+        } else if (notes[5]) { //
           htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[6]) {
-          console.log("minor"); //
+        } else if (notes[6]) { //
           htmlPrintStaff.innerHTML = "minor";
         }
       }
       //6 Flat
       if (n6.checked) {
-        if (notes[0] || notes[7]) {
-          console.log("minor"); //
+        if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[1] || notes[8]) {
-          console.log("Major"); //
+        } else if (notes[1] || notes[8]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[2]) {
-          console.log("Diminished"); //
+        } else if (notes[2]) { //
           htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[3]) {
-          console.log("minor"); //
+        } else if (notes[3]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[4]) {
-          console.log("Major"); //
+        } else if (notes[4]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[5]) {
-          console.log("Major"); //
+        } else if (notes[5]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[6]) {
-          console.log("minor"); //
+        } else if (notes[6]) { //
           htmlPrintStaff.innerHTML = "minor";
         }
       }
       //7 Flat
       if (n7.checked) {
-        if (notes[0] || notes[7]) {
-          console.log("minor"); //
+        if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[1] || notes[8]) {
-          console.log("Major"); //
+        } else if (notes[1] || notes[8]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[2]) {
-          console.log("Major"); //
+        } else if (notes[2]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[3]) {
-          console.log("minor"); //
+        } else if (notes[3]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[4]) {
-          console.log("minor"); //
+        } else if (notes[4]) { //
           htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[5]) {
-          console.log("Major"); //
+        } else if (notes[5]) { //
           htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[6]) {
-          console.log("Diminished"); //
+        } else if (notes[6]) { //
           htmlPrintStaff.innerHTML = "Diminished";
         }
       }
