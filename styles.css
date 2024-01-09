@@ -2,57 +2,57 @@ body {
       background-color: aliceblue;
 }
 
-#line1 {
+#staff0 {
       width: 400px;
-      height: 4px;
+      height: 6px;
       background: black;
 }
 
-#space1 {
+#staff1 {
       width: 400px;
       height: 10px;
       background: aliceblue;
 }
 
-#line2 {
+#staff2 {
       width: 400px;
-      height: 4px;
+      height: 6px;
       background: black;
 }
 
-#space2 {
+#staff3 {
       width: 400px;
       height: 10px;
       background: aliceblue;
 }
 
-#line3 {
+#staff4 {
       width: 400px;
-      height: 4px;
+      height: 6px;
       background: black;
 }
 
-#space3 {
+#staff5 {
       width: 400px;
       height: 10px;
       background: aliceblue;
 }
 
-#line4 {
+#staff6 {
       width: 400px;
-      height: 4px;
+      height: 6px;
       background: black;
 }
 
-#space4 {
+#staff7 {
       width: 400px;
       height: 10px;
       background: aliceblue;
 }
 
-#line5 {
+#staff8 {
       width: 400px;
-      height: 4px;
+      height: 6px;
       background: black;
 }
 
@@ -77,7 +77,7 @@ body {
 }
 
 #TrebbleCleff {
-      width: 60px;
+      width: 70px;
       position: absolute;
       left: 10px;
       top: 340px;
@@ -86,7 +86,7 @@ body {
 }
 
 #BassCleff {
-      width: 50px;
+      width: 60px;
       position: absolute;
       left: 10px;
       top: 354px;

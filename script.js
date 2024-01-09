@@ -1,13 +1,12 @@
 var button = document.getElementById("button");
-var line1 = document.getElementById("line1");
-var space1 = document.getElementById("space1");
-var line2 = document.getElementById("line2");
-var space2 = document.getElementById("space2");
-var line3 = document.getElementById("line3");
-var space3 = document.getElementById("space3");
-var line4 = document.getElementById("line4");
-var space4 = document.getElementById("space4");
-var line5 = document.getElementById("line5");
+
+//Get all staff line Objs
+let staffObjs = []
+for (var i = 0; i < 9; i++){
+  staffObjs[i] = document.getElementById("staff" + (i));
+}
+
+
 let sharpflat = [false, false, false, false, false, false, false, true];
 let notes = [true, false, false, false, false, false, false, false, false];
 var letters = ["C", "D", "E", "F", "G", "A", "B"];
@@ -22,17 +21,17 @@ var bass = document.getElementById("Bass");
 //Sharp or Flat
 var sharp = document.getElementById("Sharp");
 var flat = document.getElementById("Flat");
-//Number of accidentals
-var n0 = document.getElementById("0");
-var n1 = document.getElementById("1");
-var n2 = document.getElementById("2");
-var n3 = document.getElementById("3");
-var n4 = document.getElementById("4");
-var n5 = document.getElementById("5");
-var n6 = document.getElementById("6");
-var n7 = document.getElementById("7");
+
+//Get all accidental Objs
+let accidentalObjs = []
+for (var i = 0; i < 7; i++){
+  accidentalObjs[i] = document.getElementById(i);
+}
+
 var htmlPrintStaff = document.getElementById("printStaff");
 var htmlPrintPiano = document.getElementById("printPiano");
+
+
 
 //Run Program
 
@@ -51,39 +50,22 @@ function placeNote(num,location){
   notes[num] = true;
 }
 
+
+//Add onClick event to all line objects
+for (var i = 0; i < staffObjs.length; i++) {
+  staffObjs[i].onclick = function() {
+    console.log(parseInt(Array.from(this.id.toString()).slice(-1)[0]));
+    placeNote(parseInt(Array.from(this.id.toString()).slice(-1)[0]) ,(345 + (8 * parseInt(Array.from(this.id.toString()).slice(-1)[0]))) + "px");
+  }
+}
+
+
 //Check if a line/space was clicked and place a note on the staff
-line1.onclick = function () {
-  placeNote(0,"344px");
-};
-space1.onclick = function () {
-  placeNote(1,"350px");
-};
-line2.onclick = function () {
-  placeNote(2,"357px");
-};
-space2.onclick = function () {
-  placeNote(3,"364px");
-};
-line3.onclick = function () {
-  placeNote(4,"372px");
-};
-space3.onclick = function () {
-  placeNote(5,"380px");
-};
-line4.onclick = function () {
-  placeNote(6,"386px");
-};
-space4.onclick = function () {
-  placeNote(7,"394px");
-};
-line5.onclick = function () {
-  placeNote(8,"402px");
-};
+
 document.getElementById("note1").onclick = function () {
   document.getElementById("note1").style.visibility = "hidden";
   clearAllNotes();
 };
-
 
 document.getElementById("Trebble").onclick = function () {
   document.getElementById("TrebbleCleff").style.visibility = "visible";
@@ -160,7 +142,7 @@ for (var i = 1; i <= 7; i++) {
 for (var i = 1; i <= 7; i++) {
   document.getElementById("flat" + i).style.visibility = "hidden";
 }
-n0.checked = true;
+accidentalObjs[0].checked = true;
 }
 
 document.getElementById("Sharp").onclick = function () {
@@ -412,7 +394,7 @@ button.onclick = function () {
   //TrebbleCleff
   if (trebble.checked) {
     //0 Sharps/Flats
-    if (n0.checked) {
+    if (accidentalObjs[0].checked) {
       if (notes[0] || notes[7]) {
         htmlPrintStaff.innerHTML = "Major";
       }
@@ -438,7 +420,7 @@ button.onclick = function () {
     //CheckSharp
     else if (sharp.checked) {
       //1 Sharp
-      if (n1.checked) {
+      if (accidentalObjs[1].checked) {
         if (notes[0] || notes[7]) {
           htmlPrintStaff.innerHTML = "Diminished";
         } else if (notes[1] || notes[8]) {
@@ -456,7 +438,7 @@ button.onclick = function () {
         }
       }
       //2 Sharp
-      else if (n2.checked) {
+      else if (accidentalObjs[2].checked) {
         if (notes[0] || notes[7]) {
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[1] || notes[8]) {
@@ -474,7 +456,7 @@ button.onclick = function () {
         }
       }
       //3 Sharp
-      else if (n3.checked) {
+      else if (accidentalObjs[3].checked) {
         if (notes[0] || notes[7]) {
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[1] || notes[8]) {
@@ -492,7 +474,7 @@ button.onclick = function () {
         }
       }
       //4 Sharp
-      else if (n4.checked) {
+      else if (accidentalObjs[4].checked) {
         if (notes[0] || notes[7]) {
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[1] || notes[8]) {
@@ -510,7 +492,7 @@ button.onclick = function () {
         }
       }
       //5  Sharp
-      else if (n5.checked) {
+      else if (accidentalObjs[5].checked) {
         if (notes[0] || notes[7]) {
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[1] || notes[8]) {
@@ -528,7 +510,7 @@ button.onclick = function () {
         }
       }
       //6  Sharp
-      else if (n6.checked) {
+      else if (accidentalObjs[6].checked) {
         if (notes[0] || notes[7]) {
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[1] || notes[8]) {
@@ -546,7 +528,7 @@ button.onclick = function () {
         }
       }
       //7 Sharp
-      else if (n7.checked) {
+      else if (accidentalObjs[7].checked) {
         if (notes[0] || notes[7]) {
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[1] || notes[8]) {
@@ -568,7 +550,7 @@ button.onclick = function () {
     //CheckFlat
     else if (flat.checked) {
       //1 Flat
-      if (n1.checked) {
+      if (accidentalObjs[1].checked) {
         if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[1] || notes[8]) { //
@@ -586,7 +568,7 @@ button.onclick = function () {
         }
       }
       //2 Flat
-      else if (n2.checked) {
+      else if (accidentalObjs[2].checked) {
         if (notes[0] || notes[7]) {
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[1] || notes[8]) {
@@ -604,7 +586,7 @@ button.onclick = function () {
         }
       }
       //3 Flat
-      else if (n3.checked) {
+      else if (accidentalObjs[3].checked) {
         if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[1] || notes[8]) { //
@@ -622,7 +604,7 @@ button.onclick = function () {
         }
       }
       //4 Flat
-      else if (n4.checked) {
+      else if (accidentalObjs[4].checked) {
         if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[1] || notes[8]) { //
@@ -640,7 +622,7 @@ button.onclick = function () {
         }
       }
       //5  Sharp
-      else if (n5.checked) {
+      else if (accidentalObjs[5].checked) {
         if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[1] || notes[8]) { //
@@ -658,7 +640,7 @@ button.onclick = function () {
         }
       }
       //6  Sharp
-      else if (n6.checked) {
+      else if (accidentalObjs[6].checked) {
         if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "Diminished";
         } else if (notes[1] || notes[8]) { //
@@ -676,7 +658,7 @@ button.onclick = function () {
         }
       }
       //7 Sharp
-      else if (n7.checked) {
+      else if (accidentalObjs[7].checked) {
         if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[1] || notes[8]) { //
@@ -699,7 +681,7 @@ button.onclick = function () {
   //BassCleff
   if (bass.checked) {
     //0 Sharp
-    if (n0.checked) {
+    if (accidentalObjs[0].checked) {
       if (notes[0] || notes[7]) {
         htmlPrintStaff.innerHTML = "minor";
       } else if (notes[1] || notes[8]) {
@@ -717,7 +699,7 @@ button.onclick = function () {
       }
     } else if (sharp.checked) {
       //1 Sharp
-      if (n1.checked) {
+      if (accidentalObjs[1].checked) {
         if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[1] || notes[8]) { //
@@ -735,7 +717,7 @@ button.onclick = function () {
         }
       }
       //2 Sharp
-      if (n2.checked) {
+      if (accidentalObjs[2].checked) {
         if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[1] || notes[8]) { //
@@ -753,7 +735,7 @@ button.onclick = function () {
         }
       }
       //3 Sharp
-      if (n3.checked) {
+      if (accidentalObjs[3].checked) {
         if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[1] || notes[8]) { //
@@ -771,7 +753,7 @@ button.onclick = function () {
         }
       }
       //4 Sharp
-      if (n4.checked) {
+      if (accidentalObjs[4].checked) {
         if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[1] || notes[8]) { //
@@ -789,7 +771,7 @@ button.onclick = function () {
         }
       }
       //5 Sharp
-      if (n5.checked) {
+      if (accidentalObjs[5].checked) {
         if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "Diminished";
         } else if (notes[1] || notes[8]) { //
@@ -807,7 +789,7 @@ button.onclick = function () {
         }
       }
       //6 Sharp
-      if (n6.checked) {
+      if (accidentalObjs[6].checked) {
         if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[1] || notes[8]) { //
@@ -825,7 +807,7 @@ button.onclick = function () {
         }
       }
       //7 Sharp
-      if (n7.checked) {
+      if (accidentalObjs[7].checked) {
         if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[1] || notes[8]) { //
@@ -844,7 +826,7 @@ button.onclick = function () {
       }
     } else if (flat.checked) {
       //1 Flat
-      if (n1.checked) {
+      if (accidentalObjs[1].checked) {
         if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[1] || notes[8]) { //
@@ -862,7 +844,7 @@ button.onclick = function () {
         }
       }
       //2 Flat
-      if (n2.checked) {
+      if (accidentalObjs[2].checked) {
         if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "Diminished";
         } else if (notes[1] || notes[8]) { //
@@ -880,7 +862,7 @@ button.onclick = function () {
         }
       }
       //3 Flat
-      if (n3.checked) {
+      if (accidentalObjs[3].checked) {
         if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[1] || notes[8]) { //
@@ -898,7 +880,7 @@ button.onclick = function () {
         }
       }
       //4 Flat
-      if (n4.checked) {
+      if (accidentalObjs[4].checked) {
         if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[1] || notes[8]) { //
@@ -916,7 +898,7 @@ button.onclick = function () {
         }
       }
       //5 Flat
-      if (n5.checked) {
+      if (accidentalObjs[5].checked) {
         if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "Major";
         } else if (notes[1] || notes[8]) { //
@@ -934,7 +916,7 @@ button.onclick = function () {
         }
       }
       //6 Flat
-      if (n6.checked) {
+      if (accidentalObjs[6].checked) {
         if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[1] || notes[8]) { //
@@ -952,7 +934,7 @@ button.onclick = function () {
         }
       }
       //7 Flat
-      if (n7.checked) {
+      if (accidentalObjs[7].checked) {
         if (notes[0] || notes[7]) { //
           htmlPrintStaff.innerHTML = "minor";
         } else if (notes[1] || notes[8]) { //
