@@ -1,19 +1,11 @@
 var button = document.getElementById("button");
-
-//Get all staff line Objs
-let staffObjs = []
-for (var i = 0; i < 9; i++){
-  staffObjs[i] = document.getElementById("staff" + (i));
-}
-
-
 let sharpflat = [false, false, false, false, false, false, false, true];
 let notes = [true, false, false, false, false, false, false, false, false];
 var letters = ["C", "D", "E", "F", "G", "A", "B"];
 let pianoTileColor = [];
-pianoTileColor.fill(false,0,24);
 var pianoOutput = "";
 var currentKey;
+pianoTileColor.fill(false,0,24);
 
 //Trebble or Bass
 var trebble = document.getElementById("Trebble");
@@ -22,14 +14,21 @@ var bass = document.getElementById("Bass");
 var sharp = document.getElementById("Sharp");
 var flat = document.getElementById("Flat");
 
+var htmlPrintStaff = document.getElementById("printStaff");
+var htmlPrintPiano = document.getElementById("printPiano");
+
+
 //Get all accidental Objs
-let accidentalObjs = []
-for (var i = 0; i < 7; i++){
+let accidentalObjs = [];
+for (var i = 0; i <= 7; i++){
   accidentalObjs[i] = document.getElementById(i);
 }
 
-var htmlPrintStaff = document.getElementById("printStaff");
-var htmlPrintPiano = document.getElementById("printPiano");
+//Get all staff line Objs
+let staffObjs = []
+for (var i = 0; i < 9; i++){
+  staffObjs[i] = document.getElementById("staff" + (i));
+}
 
 
 
@@ -50,18 +49,29 @@ function placeNote(num,location){
   notes[num] = true;
 }
 
+//Gets the last number of an element's id's name
+function getElementIdNum(elem){
+  let tmp = Array.from(elem.id.toString());
+  let tmpString = "";
+  tmp.forEach(element => {
+    if(!isNaN(element)){
+      tmpString += element;
+    }
+  });
+
+  return parseInt(tmpString)
+}
 
 //Add onClick event to all line objects
 for (var i = 0; i < staffObjs.length; i++) {
   staffObjs[i].onclick = function() {
-    console.log(parseInt(Array.from(this.id.toString()).slice(-1)[0]));
-    placeNote(parseInt(Array.from(this.id.toString()).slice(-1)[0]) ,(345 + (8 * parseInt(Array.from(this.id.toString()).slice(-1)[0]))) + "px");
+    let idNum = getElementIdNum(this)
+    placeNote(idNum ,(345 + (8 * idNum) + "px"));
   }
 }
 
 
 //Check if a line/space was clicked and place a note on the staff
-
 document.getElementById("note1").onclick = function () {
   document.getElementById("note1").style.visibility = "hidden";
   clearAllNotes();
@@ -152,31 +162,13 @@ document.getElementById("Flat").onclick = function () {
   clearSharpsAndFlats();
 };
 
-//Show Sharp or Flat Key Sig (Trebble)
-document.getElementById("0").onclick = function () {
-  displaySharpsOrFlats(0);
-};
-document.getElementById("1").onclick = function () {
-  displaySharpsOrFlats(1);
-};
-document.getElementById("2").onclick = function () {
-  displaySharpsOrFlats(2);
-};
-document.getElementById("3").onclick = function () {
-  displaySharpsOrFlats(3);
-};
-document.getElementById("4").onclick = function () {
-  displaySharpsOrFlats(4);
-};
-document.getElementById("5").onclick = function () {
-  displaySharpsOrFlats(5);
-};
-document.getElementById("6").onclick = function () {
-  displaySharpsOrFlats(6);
-};
-document.getElementById("7").onclick = function () {
-  displaySharpsOrFlats(7);
-};
+//Add onClick event to all line objects to show Sharp or Flat Key Sig
+for (var i = 0; i <= 7; i++) {
+  document.getElementById(i).onclick = function() {
+    let idNum = getElementIdNum(this)
+    displaySharpsOrFlats(idNum);
+  }
+}
 
 //piano
 function togglePianoButton(key,num,s){
@@ -186,7 +178,6 @@ function togglePianoButton(key,num,s){
     } else {
       document.getElementById(key).style.backgroundColor = "white";
     }
-    
     pianoTileColor[num] = false;
   } else {
     document.getElementById(key).style.backgroundColor = "lightblue";
@@ -194,78 +185,17 @@ function togglePianoButton(key,num,s){
   }
 }
 
-document.getElementById("c1").onclick = function () {
-  togglePianoButton("c1",0,false);
-};
-document.getElementById("cs1").onclick = function () {
-  togglePianoButton("cs1",1,true);
-};
-document.getElementById("d1").onclick = function () {
-  togglePianoButton("d1",2,false);
-};
-document.getElementById("ds1").onclick = function () {
-  togglePianoButton("ds1",3,true);
-};
-document.getElementById("e1").onclick = function () {
-  togglePianoButton("e1",4,false);
-};
-document.getElementById("f1").onclick = function () {
-  togglePianoButton("f1",5,false);
-};
-document.getElementById("fs1").onclick = function () {
-  togglePianoButton("fs1",6,true);
-};
-document.getElementById("g1").onclick = function () {
-  togglePianoButton("g1",7,false);
-};
-document.getElementById("gs1").onclick = function () {
-  togglePianoButton("gs1",8,true);
-};
-document.getElementById("a1").onclick = function () {
-  togglePianoButton("a1",9,false);
-};
-document.getElementById("as1").onclick = function () {
-  togglePianoButton("as1",10,true);
-};
-document.getElementById("b1").onclick = function () {
-  togglePianoButton("b1",11,false);
-};
-document.getElementById("c2").onclick = function () {
-  togglePianoButton("c2",12,false);
-};
-document.getElementById("cs2").onclick = function () {
-  togglePianoButton("cs2",13,true);
-};
-document.getElementById("d2").onclick = function () {
-  togglePianoButton("d2",14,false);
-};
-document.getElementById("ds2").onclick = function () {
-  togglePianoButton("ds2",15,true);
-};
-document.getElementById("e2").onclick = function () {
-  togglePianoButton("e2",16,false);
-};
-document.getElementById("f2").onclick = function () {
-  togglePianoButton("f2",17,false);
-};
-document.getElementById("fs2").onclick = function () {
-  togglePianoButton("fs2",18,true);
-};
-document.getElementById("g2").onclick = function () {
-  togglePianoButton("g2",19,false);
-};
-document.getElementById("gs2").onclick = function () {
-  togglePianoButton("gs2",20,true);
-};
-document.getElementById("a2").onclick = function () {
-  togglePianoButton("a2",21,false);
-};
-document.getElementById("as2").onclick = function () {
-  togglePianoButton("as2",22,true);
-};
-document.getElementById("b2").onclick = function () {
-  togglePianoButton("b2",23,false);
-};
+//Temporary
+var blkOrWht = [false,true,false,true,false,false,true,false,true,false,true,false,false,true,false,true,false,false,true,false,true,false,true,false,]
+
+//Adds onClick to each keyboard key
+for (var i = 0; i <= 23; i++){
+  document.getElementById("p" + i).onclick = function() {
+    let idNum = getElementIdNum(this)
+    togglePianoButton("p" + idNum,idNum,blkOrWht[idNum]);
+  }
+}
+
 
 //Checks which note the chord is (ie. A,B,C,E,F...) and adds to the pianoOuput string
 function checkKey() {
@@ -385,12 +315,17 @@ function arrayToInterval(i){
   }
 }
 
+//rotates all items in array by a specified amount to the right
+function rotateArrayRight(arr,amount){
+  for (var i = 0; i < amount; i++){
+    arr.unshift(arr.pop())
+  }
+}
+
 
 //    Staff Chord Identifier   //
 button.onclick = function () {
 
-  //Staff
-  
   //TrebbleCleff
   if (trebble.checked) {
     //0 Sharps/Flats
@@ -419,130 +354,33 @@ button.onclick = function () {
     }
     //CheckSharp
     else if (sharp.checked) {
-      //1 Sharp
-      if (accidentalObjs[1].checked) {
-        if (notes[0] || notes[7]) {
-          htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[1] || notes[8]) {
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[2]) {
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[3]) {
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[4]) {
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[5]) {
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[6]) {
-          htmlPrintStaff.innerHTML = "Major";
+      
+      let num = 0;
+      let sharps = ["Diminished","minor", "Major", "Major",  "minor", "minor", "Major"]
+
+      //Go through list of 
+      for(var i = 1; i <= 7; i++){
+        if (accidentalObjs[i].checked){
+          num = i;
         }
       }
-      //2 Sharp
-      else if (accidentalObjs[2].checked) {
-        if (notes[0] || notes[7]) {
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[1] || notes[8]) {
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[2]) {
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[3]) {
-          htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[4]) {
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[5]) {
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[6]) {
-          htmlPrintStaff.innerHTML = "Major";
-        }
+
+      //Rotate the array depending on the amount of sharps
+      for (var i = 0; i < num - 1; i++){
+        rotateArrayRight(sharps,3);
       }
-      //3 Sharp
-      else if (accidentalObjs[3].checked) {
-        if (notes[0] || notes[7]) {
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[1] || notes[8]) {
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[2]) {
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[3]) {
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[4]) {
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[5]) {
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[6]) {
-          htmlPrintStaff.innerHTML = "Diminished";
-        }
-      }
-      //4 Sharp
-      else if (accidentalObjs[4].checked) {
-        if (notes[0] || notes[7]) {
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[1] || notes[8]) {
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[2]) {
-          htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[3]) {
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[4]) {
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[5]) {
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[6]) {
-          htmlPrintStaff.innerHTML = "minor";
-        }
-      }
-      //5  Sharp
-      else if (accidentalObjs[5].checked) {
-        if (notes[0] || notes[7]) {
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[1] || notes[8]) {
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[2]) {
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[3]) {
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[4]) {
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[5]) {
-          htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[6]) {
-          htmlPrintStaff.innerHTML = "minor";
-        }
-      }
-      //6  Sharp
-      else if (accidentalObjs[6].checked) {
-        if (notes[0] || notes[7]) {
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[1] || notes[8]) {
-          htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[2]) {
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[3]) {
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[4]) {
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[5]) {
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[6]) {
-          htmlPrintStaff.innerHTML = "minor";
-        }
-      }
-      //7 Sharp
-      else if (accidentalObjs[7].checked) {
-        if (notes[0] || notes[7]) {
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[1] || notes[8]) {
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[2]) {
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[3]) {
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[4]) {
-          console.log("");
-        } else if (notes[5]) {
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[6]) {
-          htmlPrintStaff.innerHTML = "Major";
+
+      //Check which note is places and display result
+      if(notes[0] || notes[7]){
+        htmlPrintStaff.innerHTML = sharps[0];
+      } else if (notes[1] || notes[8]){
+        htmlPrintStaff.innerHTML = sharps[1];
+      } else {
+        for (var i = 2; i <= 6; i++){
+          if(notes[i]){
+            htmlPrintStaff.innerHTML = sharps[i];
+            break;
+          }
         }
       }
     }
