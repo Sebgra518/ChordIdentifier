@@ -31,7 +31,6 @@ for (var i = 0; i < 9; i++){
 }
 
 
-
 //Run Program
 
 //Staff
@@ -196,7 +195,6 @@ for (var i = 0; i <= 23; i++){
   }
 }
 
-
 //Checks which note the chord is (ie. A,B,C,E,F...) and adds to the pianoOuput string
 function checkKey() {
   for (var i = 0; i < 11; i++) {
@@ -258,6 +256,7 @@ function checkAdditional() {
   }
 }
 
+//Adds on the note that is not part of a significant cord (ex: Cadd6)
 function checkAdd(start){
  for (var i = start; i < 24; i++){
   if (pianoTileColor[i]){
@@ -270,49 +269,25 @@ function checkAdd(start){
 //Converts the array version of the piano into intervals (still trying to find a way to optimise)
 //Yes, I could of used switch, but used for my better understanding of the problem
 function arrayToInterval(i){
-  //If i is even
-  if (i == 2){
-    return 2; //-0
-  }
-  else if (i == 4){
-    return 3; //-1
-  }
-  else if (i == 12){
-    return 8;  //-4
-  }
-  else if (i == 14){
-    return 9;  //-5
-  }
-  else if (i == 16){
-    return 10;  //-6
-  }
 
+  let r = 0;
 
-//If i is odd
-  else if (i == 5){
-    return 4; //-1
+if(i % 2 == 0){
+  if(i <= 4){
+    r = 1/2 * i + 1;
+  } else {
+    r = 1/2 * i + 2;
   }
-  else if (i == 7){
-    return 5; //-2
+} else {
+  if (i <= 11){
+    r = 1/2 * i + 1.5;
+  } else {
+    r = 1/2 * i + 2.5;
   }
-  else if (i == 9){
-    return 6; //-3
-  }
-  else if (i == 11){
-    return 7; //-4
-  }
-  else if (i == 17){
-    return 11;  //-6
-  }
-  else if (i == 19){
-    return 12;  //-7
-  }
-  else if (i == 21){
-    return 13;  //-8
-  }
-  else if (i == 23){
-    return 14;  //-9
-  }
+}
+
+return r;
+
 }
 
 //rotates all items in array by a specified amount to the right
@@ -321,7 +296,6 @@ function rotateArrayRight(arr,amount){
     arr.unshift(arr.pop())
   }
 }
-
 
 //    Staff Chord Identifier   //
 button.onclick = function () {
@@ -352,6 +326,7 @@ button.onclick = function () {
         htmlPrintStaff.innerHTML = "Major";
       }
     }
+
     //CheckSharp
     else if (sharp.checked) {
       
@@ -387,130 +362,34 @@ button.onclick = function () {
 
     //CheckFlat
     else if (flat.checked) {
-      //1 Flat
-      if (accidentalObjs[1].checked) {
-        if (notes[0] || notes[7]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[1] || notes[8]) { //
-          htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[2]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[3]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[4]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[5]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[6]) { //
-          htmlPrintStaff.innerHTML = "minor";
+
+      let num2 = 0;
+      let flats = ["Major","Diminished", "minor", "Major",  "Major", "minor", "minor"]
+
+
+      //Go through list of 
+      for(var i = 1; i <= 7; i++){
+        if (accidentalObjs[i].checked){
+          num2 = i;
         }
       }
-      //2 Flat
-      else if (accidentalObjs[2].checked) {
-        if (notes[0] || notes[7]) {
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[1] || notes[8]) {
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[2]) {
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[3]) {
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[4]) {
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[5]) {
-          htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[6]) {
-          htmlPrintStaff.innerHTML = "minor";
-        }
+
+      //Rotate the array depending on the amount of sharps
+      for (var i = 0; i < num2 - 1; i++){
+        rotateArrayRight(flats,4);
       }
-      //3 Flat
-      else if (accidentalObjs[3].checked) {
-        if (notes[0] || notes[7]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[1] || notes[8]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[2]) { //
-          htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[3]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[4]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[5]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[6]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        }
-      }
-      //4 Flat
-      else if (accidentalObjs[4].checked) {
-        if (notes[0] || notes[7]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[1] || notes[8]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[2]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[3]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[4]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[5]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[6]) { //
-          htmlPrintStaff.innerHTML = "Diminished";
-        }
-      }
-      //5  Sharp
-      else if (accidentalObjs[5].checked) {
-        if (notes[0] || notes[7]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[1] || notes[8]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[2]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[3]) { //
-          htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[4]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[5]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[6]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        }
-      }
-      //6  Sharp
-      else if (accidentalObjs[6].checked) {
-        if (notes[0] || notes[7]) { //
-          htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[1] || notes[8]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[2]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[3]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[4]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[5]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[6]) {
-          htmlPrintStaff.innerHTML = "Major";
-        }
-      }
-      //7 Sharp
-      else if (accidentalObjs[7].checked) {
-        if (notes[0] || notes[7]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[1] || notes[8]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[2]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[3]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[4]) { //
-          htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[5]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[6]) { //
-          htmlPrintStaff.innerHTML = "Major";
+
+      //Check which note is places and display result
+      if(notes[0] || notes[7]){
+        htmlPrintStaff.innerHTML = flats[0];
+      } else if (notes[1] || notes[8]){
+        htmlPrintStaff.innerHTML = flats[1];
+      } else {
+        for (var i = 2; i <= 6; i++){
+          if(notes[i]){
+            htmlPrintStaff.innerHTML = flats[i];
+            break;
+          }
         }
       }
     }
@@ -535,258 +414,67 @@ button.onclick = function () {
       } else if (notes[6]) {
         htmlPrintStaff.innerHTML = "Diminished";
       }
-    } else if (sharp.checked) {
-      //1 Sharp
-      if (accidentalObjs[1].checked) {
-        if (notes[0] || notes[7]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[1] || notes[8]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[2]) { //
-          htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[3]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[4]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[5]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[6]) { //
-          htmlPrintStaff.innerHTML = "minor";
+    } 
+    else if (sharp.checked) {
+
+      let num3 = 0;
+      let sharps2 = ["minor","Major", "Diminished", "minor",  "Major", "Major", "minor"]
+
+      //Go through list of 
+      for(var i = 1; i <= 7; i++){
+        if (accidentalObjs[i].checked){
+          num3 = i;
         }
       }
-      //2 Sharp
-      if (accidentalObjs[2].checked) {
-        if (notes[0] || notes[7]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[1] || notes[8]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[2]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[3]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[4]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[5]) { //
-          htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[6]) { //
-          htmlPrintStaff.innerHTML = "minor";
+
+      //Rotate the array depending on the amount of sharps
+      for (var i = 0; i < num3 - 1; i++){
+        rotateArrayRight(sharps2,3);
+      }
+
+      //Check which note is places and display result
+      if(notes[0] || notes[7]){
+        htmlPrintStaff.innerHTML = sharps2[0];
+      } else if (notes[1] || notes[8]){
+        htmlPrintStaff.innerHTML = sharps2[1];
+      } else {
+        for (var i = 2; i <= 6; i++){
+          if(notes[i]){
+            htmlPrintStaff.innerHTML = sharps2[i];
+            break;
+          }
         }
       }
-      //3 Sharp
-      if (accidentalObjs[3].checked) {
-        if (notes[0] || notes[7]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[1] || notes[8]) { //
-          htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[2]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[3]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[4]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[5]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[6]) { //
-          htmlPrintStaff.innerHTML = "minor";
+    } 
+    else if (flat.checked) {
+
+      let num4 = 0;
+      let flats2 = ["minor","minor", "Major", "Diminished",  "minor", "Major", "Major"]
+
+
+      //Go through list of 
+      for(var i = 1; i <= 7; i++){
+        if (accidentalObjs[i].checked){
+          num4 = i;
         }
       }
-      //4 Sharp
-      if (accidentalObjs[4].checked) {
-        if (notes[0] || notes[7]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[1] || notes[8]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[2]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[3]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[4]) { //
-          htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[5]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[6]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        }
+
+      //Rotate the array depending on the amount of sharps
+      for (var i = 0; i < num4 - 1; i++){
+        rotateArrayRight(flats2,4);
       }
-      //5 Sharp
-      if (accidentalObjs[5].checked) {
-        if (notes[0] || notes[7]) { //
-          htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[1] || notes[8]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[2]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[3]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[4]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[5]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[6]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        }
-      }
-      //6 Sharp
-      if (accidentalObjs[6].checked) {
-        if (notes[0] || notes[7]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[1] || notes[8]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[2]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[3]) { //
-          htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[4]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[5]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[6]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        }
-      }
-      //7 Sharp
-      if (accidentalObjs[7].checked) {
-        if (notes[0] || notes[7]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[1] || notes[8]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[2]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[3]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[4]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[5]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[6]) { //
-          htmlPrintStaff.innerHTML = "Diminished";
-        }
-      }
-    } else if (flat.checked) {
-      //1 Flat
-      if (accidentalObjs[1].checked) {
-        if (notes[0] || notes[7]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[1] || notes[8]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[2]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[3]) { //
-          htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[4]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[5]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[6]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        }
-      }
-      //2 Flat
-      if (accidentalObjs[2].checked) {
-        if (notes[0] || notes[7]) { //
-          htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[1] || notes[8]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[2]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[3]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[4]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[5]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[6]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        }
-      }
-      //3 Flat
-      if (accidentalObjs[3].checked) {
-        if (notes[0] || notes[7]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[1] || notes[8]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[2]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[3]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[4]) { //
-          htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[5]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[6]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        }
-      }
-      //4 Flat
-      if (accidentalObjs[4].checked) {
-        if (notes[0] || notes[7]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[1] || notes[8]) { //
-          htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[2]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[3]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[4]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[5]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[6]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        }
-      }
-      //5 Flat
-      if (accidentalObjs[5].checked) {
-        if (notes[0] || notes[7]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[1] || notes[8]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[2]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[3]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[4]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[5]) { //
-          htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[6]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        }
-      }
-      //6 Flat
-      if (accidentalObjs[6].checked) {
-        if (notes[0] || notes[7]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[1] || notes[8]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[2]) { //
-          htmlPrintStaff.innerHTML = "Diminished";
-        } else if (notes[3]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[4]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[5]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[6]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        }
-      }
-      //7 Flat
-      if (accidentalObjs[7].checked) {
-        if (notes[0] || notes[7]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[1] || notes[8]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[2]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[3]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[4]) { //
-          htmlPrintStaff.innerHTML = "minor";
-        } else if (notes[5]) { //
-          htmlPrintStaff.innerHTML = "Major";
-        } else if (notes[6]) { //
-          htmlPrintStaff.innerHTML = "Diminished";
+
+      //Check which note is places and display result
+      if(notes[0] || notes[7]){
+        htmlPrintStaff.innerHTML = flats2[0];
+      } else if (notes[1] || notes[8]){
+        htmlPrintStaff.innerHTML = flats2[1];
+      } else {
+        for (var i = 2; i <= 6; i++){
+          if(notes[i]){
+            htmlPrintStaff.innerHTML = flats2[i];
+            break;
+          }
         }
       }
     }
